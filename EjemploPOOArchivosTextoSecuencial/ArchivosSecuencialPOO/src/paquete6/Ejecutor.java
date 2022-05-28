@@ -8,9 +8,9 @@ public class Ejecutor {
         // nombre del archivo
         String nombreArchivo = "Hospital.txt";
         
-        Hospital h1 = new Hospital("San Pancho",100,1000.35);
-        Hospital h2 = new Hospital("Las Fuentes",500,14000);
-        Hospital h3 = new Hospital("Sana Sana",200,13000);
+        Hospital h1 = new Hospital("San Pancho",150,8000.35);
+        Hospital h2 = new Hospital("San Jose",500,12000);
+        Hospital h3 = new Hospital("Abendaño",100,17000);
         
         ArchivoEscritura archivo = new ArchivoEscritura(nombreArchivo);
         
