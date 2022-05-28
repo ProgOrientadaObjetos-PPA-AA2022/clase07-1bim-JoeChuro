@@ -14,15 +14,14 @@ public class Ejecutor {
     public static void main(String[] args) {
         String nombreArchivo = "Hospitales.data";
 
-        Hospital h1 = new Hospital("Clinica Abendanio", 20, 2000);
-        Hospital h2 = new Hospital("Clinica San Antonio", 20, 2000);
-        Hospital h3 = new Hospital("Clinica Santa Ines", 20, 2000);
+        Hospital h1 = new Hospital("Clinica Abendanio", 20, 2000, "1");
+        Hospital h2 = new Hospital("Clinica San Antonio", 20, 2000, "2");
+        Hospital h3 = new Hospital("Clinica Santa Ines", 20, 2000, "3");
 
         Hospital[] lista = {h1, h2, h3};
-        
-        EscrituraArchivoSecuencial archivo = new
-        EscrituraArchivoSecuencial(nombreArchivo);
-        
+
+        EscrituraArchivoSecuencial archivo = new EscrituraArchivoSecuencial(nombreArchivo);
+
         archivo.establecerHospitales(h1);
         archivo.establecerSalida();
         archivo.establecerHospitales(h2);
@@ -42,7 +41,5 @@ public class Ejecutor {
         lectura.establecerListaHospitales();
         System.out.println(lectura);
     }
-        
-        
-    }
 
+}

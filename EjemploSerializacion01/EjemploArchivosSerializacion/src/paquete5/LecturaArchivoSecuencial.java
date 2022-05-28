@@ -11,7 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-
+import paquete5.Hospital;
 /**
  *
  * @author SALA I
@@ -21,6 +21,8 @@ public class LecturaArchivoSecuencial {
     private ObjectInputStream entrada;
     private ArrayList<Hospital> hospitales;
     private String nombreArchivo;
+    private String identificador;
+    private Hospital hospitalBuscado;
 
     public LecturaArchivoSecuencial(String n) {
         nombreArchivo = n;
@@ -67,6 +69,41 @@ public class LecturaArchivoSecuencial {
         }
 
     }
+    public void establecerIdentificador(String n) {
+        identificador = n;
+    }
+    
+    public void estableceHospitalBuscado() {
+        // 
+        
+        File f = new File(obtenerNombreArchivo());
+        if (f.exists()) {
+
+            while (true) {
+                try {
+                    Hospital hospitales = (Hospital) entrada.readObject();
+                    
+                    if(hospitales.obtenerId().equals(identificador)){
+                        hospitalBuscado = hospitales;
+                        break;
+                    }
+                    
+                } catch (EOFException endOfFileException) {
+                    return; // se llegó al fin del archivo
+                    // se puede usar el break;
+                    // System.err.println("Fin de archivo: " + endOfFileException);
+
+                } catch (IOException ex) {
+                    System.err.println("Error al leer el archivo: " + ex);
+                } catch (ClassNotFoundException ex) {
+                    System.err.println("No se pudo crear el objeto: " + ex);
+                } catch (Exception ex) {
+                    System.err.println("No hay datos en el archivo: " + ex);
+
+                }
+            }
+        }
+    }
 
     public ArrayList<Hospital> obtenerListaHospitales() {
         return hospitales;
@@ -75,16 +112,20 @@ public class LecturaArchivoSecuencial {
     public String obtenerNombreArchivo() {
         return nombreArchivo;
     }
+    public Hospital obtenerHospitalBuscado() {
+        return hospitalBuscado;
+    }
 
     @Override
     public String toString() {
         String cadena = "Lista de Hospitales\n";
         for (int i = 0; i < obtenerListaHospitales().size(); i++) {
             Hospital x = obtenerListaHospitales().get(i);
-            cadena = String.format("%s%s-%d-%s\n", cadena,
+            cadena = String.format("%s%s-%d-%s-Id: %s\n", cadena,
                     x.obtenerNombreHospital(), 
                     x.obtenerNumeroCamas(), 
-                    x.obtenerPresupuesto());
+                    x.obtenerPresupuesto(),
+                    x.obtenerId());
         }
 
         return cadena;
